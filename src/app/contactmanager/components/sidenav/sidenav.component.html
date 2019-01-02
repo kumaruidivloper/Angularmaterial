@@ -1,0 +1,34 @@
+<mat-drawer-container class="app-sidenav-container" autosize 
+   [class.dark-theme]="isDarkTheme" [dir]="dir">
+    <mat-drawer #drawer class="app-sidenav mat-elevation-z10"
+     [opened]="!isScreenSmall()" 
+     [mode]="isScreenSmall() ? 'over' : 'side'">
+      <mat-toolbar color="primary">
+        Contacts
+      </mat-toolbar>
+      <mat-nav-list>
+          <mat-list-item *ngFor="let user of users | async">
+             <a matLine [routerLink]="['/contactmanager', user.id]">
+               <!-- <mat-icon svgIcon="{{user.avatar}}"></mat-icon>--> {{ user.name }} 
+             </a>
+             <!-- <button mat-icon-button (click)="showInfo(link)">
+                <mat-icon>info</mat-icon>
+             </button> -->
+          </mat-list-item>
+        </mat-nav-list>
+      <!-- <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Toggle extra text
+      </button> -->
+    </mat-drawer>
+  
+    <div class="app-sidenav-content">
+        <app-toolbar (toggleTheme)="toggleTheme()" 
+                     (toggleSidenav)="drawer.toggle()"
+                     (toggleDir)="toggleDir()"></app-toolbar>
+        <div class="wrapper">
+          <router-outlet></router-outlet>
+        </div>
+    </div>
+  
+  </mat-drawer-container>
